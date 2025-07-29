@@ -44,6 +44,7 @@ python pgm_to_sdf.py map.pgm map.yaml -o my_world.sdf --height 3.0 --thickness 0
 | `--height` | `2.0` | Wall height in meters |
 | `--thickness` | `0.1` | Wall thickness in meters |
 | `--threshold` | `128` | Pixel threshold for wall detection |
+| `--sensitivity` | `1.0` | Line detection sensitivity (higher = detect more curved/short walls) |
 
 ## :wrench: How It Works
 
@@ -53,11 +54,28 @@ python pgm_to_sdf.py map.pgm map.yaml -o my_world.sdf --height 3.0 --thickness 0
 4. **Generate Walls** :bricks: - Creates 3D wall boxes from detected lines
 5. **Export SDF** :outbox_tray: - Outputs Gazebo-compatible world file
 
-## :file_folder: Example Files
+## :camera: Example: Input vs Output
+
+| Input (2D SLAM Map) | Output (3D Gazebo World) |
+|---------------------|--------------------------|
+| ![Input Map](pics/input_map.png) | ![Output SDF World](pics/output_sdf_world.png) |
+
+**Input YAML metadata:**
+```yaml
+image: map_3.pgm
+mode: trinary
+resolution: 0.05
+origin: [-8.29, -8.64, 0]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.25
+```
+
+## :file_folder: File Structure
 
 Your map files should look like:
-- `map.pgm` - Grayscale occupancy grid (black = walls, white = free space)
-- `map.yaml` - Metadata with resolution, origin, and other parameters
+- `map_3.pgm` - Grayscale occupancy grid (black = walls, white = free space)
+- `map_3.yaml` - Metadata with resolution, origin, and other parameters
 
 ## :video_game: Using in Gazebo
 

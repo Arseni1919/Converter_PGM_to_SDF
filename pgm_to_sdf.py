@@ -152,9 +152,9 @@ def apply_noise_filtering(map_array, filter_config=None):
     return filtered_map
 
 
-def simple_line_detection(map_array, threshold=128):
-    """Simple, clean line detection from PGM image"""
-    print("Simple line detection starting...")
+def simple_line_detection(map_array, threshold=128, sensitivity=1.0):
+    """Line detection with adjustable sensitivity for detecting curved/short walls"""
+    print(f"Line detection starting (sensitivity: {sensitivity})...")
     
     # Create binary image: walls are black (< threshold)
     binary = (map_array < threshold).astype(np.uint8) * 255
@@ -163,14 +163,26 @@ def simple_line_detection(map_array, threshold=128):
     # Simple edge detection
     edges = cv2.Canny(binary, 50, 150)
     
-    # Hough line detection with simple parameters
+    # Adjust Hough parameters based on sensitivity
+    # Higher sensitivity = detect more/shorter/weaker lines
+    base_hough_threshold = 50
+    base_min_length = 20
+    base_max_gap = 10
+    
+    hough_threshold = max(1, int(base_hough_threshold / sensitivity))
+    min_line_length = max(1, int(base_min_length / sensitivity))  
+    max_gap = int(base_max_gap * sensitivity)
+    
+    print(f"Hough parameters: threshold={hough_threshold}, minLength={min_line_length}, maxGap={max_gap}")
+    
+    # Hough line detection with sensitivity-adjusted parameters
     lines = cv2.HoughLinesP(
         edges,
-        rho=1,                # Distance resolution in pixels
-        theta=np.pi/180,      # Angle resolution in radians  
-        threshold=50,         # Minimum number of votes
-        minLineLength=20,     # Minimum line length
-        maxLineGap=10         # Maximum gap between line segments
+        rho=1,                    # Distance resolution in pixels
+        theta=np.pi/180,          # Angle resolution in radians  
+        threshold=hough_threshold, # Minimum number of votes (lower = more sensitive)
+        minLineLength=min_line_length, # Minimum line length (lower = detect shorter lines)
+        maxLineGap=max_gap        # Maximum gap between segments (higher = connect more)
     )
     
     # Convert to simple line format
@@ -255,7 +267,7 @@ def create_simple_sdf(walls, world_name="slam_world"):
     ET.SubElement(light, "direction").text = "-0.5 0.1 -0.9"
     
     # Add ground plane
-    ground = ET.SubElement(world, "model", name="ground")
+    ground = ET.SubElement(world, "model", name="ground_plane")
     ET.SubElement(ground, "static").text = "true"
     ground_link = ET.SubElement(ground, "link", name="link")
     
@@ -272,6 +284,12 @@ def create_simple_sdf(walls, world_name="slam_world"):
     ground_vis_plane = ET.SubElement(ground_vis_geom, "plane")
     ET.SubElement(ground_vis_plane, "normal").text = "0 0 1"
     ET.SubElement(ground_vis_plane, "size").text = "100 100"
+    
+    # Ground material
+    ground_material = ET.SubElement(ground_vis, "material")
+    ET.SubElement(ground_material, "ambient").text = "0.8 0.8 0.8 1"
+    ET.SubElement(ground_material, "diffuse").text = "0.8 0.8 0.8 1"
+    ET.SubElement(ground_material, "specular").text = "0.8 0.8 0.8 1"
     
     # Add each wall
     for wall in walls:
@@ -748,7 +766,7 @@ def create_sdf_world(walls, world_name="slam_world"):
     return sdf
 
 
-def simple_pgm_to_sdf(pgm_file, yaml_file, output_sdf, wall_height=2.0, wall_thickness=0.1, threshold=128):
+def simple_pgm_to_sdf(pgm_file, yaml_file, output_sdf, wall_height=2.0, wall_thickness=0.1, threshold=128, sensitivity=1.0):
     """Simple, clean conversion from PGM/YAML to SDF"""
     print(f"Simple conversion: {pgm_file} + {yaml_file} -> {output_sdf}")
     
@@ -756,8 +774,8 @@ def simple_pgm_to_sdf(pgm_file, yaml_file, output_sdf, wall_height=2.0, wall_thi
     map_array, map_metadata = load_map_data(pgm_file, yaml_file)
     print(f"Map: {map_array.shape}, Resolution: {map_metadata['resolution']}, Origin: {map_metadata['origin']}")
     
-    # 2. Detect lines from image
-    line_segments = simple_line_detection(map_array, threshold)
+    # 2. Detect lines from image with sensitivity control
+    line_segments = simple_line_detection(map_array, threshold, sensitivity)
     
     # 3. Scale lines to world coordinates  
     world_lines = scale_lines_to_world(
@@ -794,6 +812,7 @@ def main():
     parser.add_argument('--height', type=float, default=2.0, help='Wall height (default: 2.0m)')
     parser.add_argument('--thickness', type=float, default=0.1, help='Wall thickness (default: 0.1m)')
     parser.add_argument('--threshold', type=int, default=128, help='Wall threshold (default: 128)')
+    parser.add_argument('--sensitivity', type=float, default=1.0, help='Line detection sensitivity (default: 1.0, higher = detect more curved/short walls)')
 
     args = parser.parse_args()
 
@@ -813,7 +832,8 @@ def main():
             args.output,
             args.height,
             args.thickness,
-            args.threshold
+            args.threshold,
+            args.sensitivity
         )
         print("Success!")
         
