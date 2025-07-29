@@ -2,6 +2,14 @@
 
 Convert 2D SLAM maps (PGM + YAML) into 3D Gazebo worlds (SDF format) for robot simulation.
 
+## :package: Installation
+
+**No cloning needed!** Just download the single file:
+
+1. Download [`pgm_to_sdf.py`](pgm_to_sdf.py)
+2. Install dependencies (see below)
+3. Run it!
+
 ## :rocket: Quick Start
 
 ```bash
