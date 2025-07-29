@@ -54,7 +54,7 @@ Your map files should look like:
 ## :video_game: Using in Gazebo
 
 ```bash
-gazebo slam_world.sdf
+gz sim slam_world.sdf
 ```
 
 The generated world includes:
