@@ -1,0 +1,551 @@
+<?xml version="1.0" ?>
+<!-- =================================================================================== -->
+<!-- =================================================================================== -->
+<!-- =================================================================================== -->
+<!-- =================================================================================== -->
+<sdf version='1.11'>
+  <model canonical_link='base_footprint' name='my_robot'>
+
+    <!-- ##################################### BASE FOOTPRINT ##################################### -->
+
+    <link name="base_footprint">
+       <must_be_base_link>true</must_be_base_link>
+    </link>
+
+
+
+
+    <!-- ##################################### BASE_LINK ##################################### -->
+
+    <link name='base_link'>
+      <pose relative_to="base_joint"/>
+      <inertial>
+        <pose>0.0009852620087336208 0 0.2124426691975819 0 0 0</pose>
+        <mass>67.783999999999992</mass>
+        <inertia>
+          <ixx>6.5240293486313767</ixx>
+          <ixy>0</ixy>
+          <ixz>-0.040012688789648768</ixz>
+          <iyy>7.4711742236227954</iyy>
+          <iyz>0</iyz>
+          <izz>1.9274947349914191</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_base_link_collision'>
+        <pose>0 0 0.11 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.47999999999999998 0.497 0.01</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='base_link_base_link_visual'>
+        <pose>0 0 -0.03 0 0 1.5707963267948959</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/ars/ros2_ws/src/ros_gz_example_description/models/meshes/robot_base.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+
+      <collision name='base_link_back_caster_collision_1'>
+        <pose>-0.14999999999999999 0 -0.019259259259259229 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.050000000000000003</radius>
+          </sphere>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode>
+              <mu>0.01</mu>
+              <mu2>0.01</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='base_link_back_caster_visual_1'>
+        <pose>-0.14999999999999999 0 -0.019259259259259229 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.050000000000000003</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+
+      <collision name='base_link_front_caster_collision_2'>
+        <pose>0.14999999999999999 0 -0.019259259259259229 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.050000000000000003</radius>
+          </sphere>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode>
+              <mu>0.01</mu>
+              <mu2>0.01</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='base_link_front_caster_visual_3'>
+        <pose>0.14999999999999999 0 -0.019259259259259229 0 0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.050000000000000003</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+
+      <collision name='base_link_torso_link_collision_3'>
+        <pose>-0.014999999999999999 0 0.64500000000000002 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.34999999999999998 0.45000000000000001 0.01</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='base_link_torso_link_visual_5'>
+        <pose>0.01 0 0.29499999999999998 0 0 1.5707963267948959</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/ars/ros2_ws/src/ros_gz_example_description/models/meshes/torso.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+
+      <collision name='base_link_head_link_collision_4'>
+        <pose>-0.045000000000000012 0 1.325 0 1.5707963267948966 0</pose>
+        <geometry>
+          <box>
+            <size>0.45000000000000001 0.29999999999999999 0.01</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='base_link_head_link_visual_7'>
+        <pose>0.0050000000000000001 -0.050000000000000003 1.2649999999999999 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/ars/ros2_ws/src/ros_gz_example_description/models/meshes/head.stl</uri>
+
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+
+      <collision name='base_link_screen_link_collision_5'>
+        <pose>-0.0050000000000000001 0 1.3380000000000001 -1.5707963267948959 -5.5511151231257827e-17 -1.5707963267948959</pose>
+        <geometry>
+          <box>
+            <size>0.20000000000000001 0.34699999999999998 0.0050000000000000001</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='base_link_screen_link_visual_8'>
+        <pose>-0.0050000000000000001 0 1.3380000000000001 -1.5707963267948959 -5.5511151231257827e-17 -1.5707963267948959</pose>
+        <geometry>
+          <box>
+            <size>0.20000000000000001 0.34699999999999998 0.0050000000000000001</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <diffuse>0 0 0 1</diffuse>
+          <ambient>0 0 0 1</ambient>
+        </material>
+      </visual>
+
+      <visual name='base_link_docking_camera_link_visual_2'>
+        <pose>-0.23999999999999999 0 0.080000000000000016 0 0 3.1415926535897931</pose>
+        <geometry>
+          <box>
+            <size>0.001 0.001 0.001</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.627451003 0.627451003 0.627451003 1</diffuse>
+          <ambient>0.627451003 0.627451003 0.627451003 1</ambient>
+        </material>
+      </visual>
+
+      <visual name='base_link_ai_camera_link_visual_6'>
+        <pose>-0.14499999999999999 0 1.0049999999999999 0 0 3.1415926535897931</pose>
+        <geometry>
+          <box>
+            <size>0.001 0.001 0.001</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.627451003 0.627451003 0.627451003 1</diffuse>
+          <ambient>0.627451003 0.627451003 0.627451003 1</ambient>
+        </material>
+      </visual>
+
+<!--      <visual name='base_link_laser_frame_visual_4'>-->
+<!--        <pose>0.089999999999999997 0 0.26500000000000001 0 0 0</pose>-->
+<!--        <geometry>-->
+<!--          <cylinder>-->
+<!--            <length>0.001</length>-->
+<!--            <radius>0.01</radius>-->
+<!--          </cylinder>-->
+<!--        </geometry>-->
+<!--        <material>-->
+<!--          <script>-->
+<!--            <name>Gazebo/Black</name>-->
+<!--            <uri>file://media/materials/scripts/gazebo.material</uri>-->
+<!--          </script>-->
+<!--          <diffuse>0 0 0 1</diffuse>-->
+<!--          <ambient>0 0 0 1</ambient>-->
+<!--        </material>-->
+<!--      </visual>-->
+
+      <sensor name="imu_sensor" type="imu">
+          <always_on>1</always_on>
+          <update_rate>1</update_rate>
+          <visualize>true</visualize>
+          <topic>imu</topic>
+      </sensor>
+    </link>
+
+
+    <joint name='base_joint' type='fixed'>
+      <parent>base_footprint</parent>
+      <child>base_link</child>
+      <pose relative_to="base_footprint">0 0 0.2 0 0 0</pose>
+    </joint>
+
+
+
+    <!-- ##################################### LEFT WHEEL ##################################### -->
+
+    <link name='drivewhl_l_link'>
+<!--      <pose relative_to='drivewhl_l_joint'>0 0 0 0 0 0</pose>-->
+<!--      <pose>0.1 0.1235 0 0 0 0</pose>-->
+      <pose relative_to="drivewhl_l_joint"/>
+      <inertial>
+        <mass>110.5</mass>
+        <inertia>
+          <ixx>0.148</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.148</iyy>
+          <iyz>0</iyz>
+          <izz>0.271</izz>
+        </inertia>
+      </inertial>
+      <collision name='drivewhl_l_link_collision'>
+        <pose>0 0 0 1.570796 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.038</length>
+            <radius>0.07</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='drivewhl_l_link_visual'>
+        <pose>0 0 0 1.570796 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.038</length>
+            <radius>0.07</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name='drivewhl_l_joint' type='revolute'>
+      <parent>base_link</parent>
+      <child>drivewhl_l_link</child>
+      <pose relative_to="base_link">0.1 0.1235 0 0 0 0</pose>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-inf</lower>
+          <upper>inf</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <!-- ##################################### RIGHT WHEEL ##################################### -->
+
+    <link name='drivewhl_r_link'>
+<!--      <pose relative_to='drivewhl_r_joint'>0 0 0 0 0 0</pose>-->
+<!--      <pose>0.1 -0.1235 0 0 0 0</pose>-->
+      <pose relative_to="drivewhl_r_joint"/>
+      <inertial>
+        <mass>110.5</mass>
+        <inertia>
+          <ixx>0.148</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.148</iyy>
+          <iyz>0</iyz>
+          <izz>0.271</izz>
+        </inertia>
+      </inertial>
+      <collision name='drivewhl_r_link_collision'>
+        <pose>0 0 0 1.570796 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.038</length>
+            <radius>0.07</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='drivewhl_r_link_visual'>
+        <pose>0 0 0 1.570796 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.038</length>
+            <radius>0.07</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name='drivewhl_r_joint' type='revolute'>
+      <parent>base_link</parent>
+      <child>drivewhl_r_link</child>
+      <pose relative_to="base_link">0.1 -0.1235 0 0 0 0</pose>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-inf</lower>
+          <upper>inf</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+
+
+    <!-- ##################################### LIDAR ##################################### -->
+
+    <link name='lidar_link'>
+        <pose relative_to="lidar_joint"/>
+<!--        <pose>0.12 0 0.28 0 0 0</pose>-->
+        <inertial>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>0.000167</ixx>
+            <iyy>0.000167</iyy>
+            <izz>0.000167</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.02 0.02 0.02</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.02 0.02 0.02</size>
+            </box>
+          </geometry>
+        </visual>
+
+        <sensor name='lidar' type='gpu_lidar'>
+          <always_on>true</always_on>
+          <visualize>true</visualize>
+          <update_rate>10</update_rate>
+          <topic>scan</topic>
+          <gz_frame_id>lidar_link</gz_frame_id>
+          <lidar>
+            <scan>
+              <horizontal>
+                <samples>640</samples>
+                <resolution>1</resolution>
+                <min_angle>-2.26893</min_angle>
+                <max_angle>2.26893</max_angle>
+              </horizontal>
+            </scan>
+            <range>
+              <min>0.08</min>
+              <max>10.0</max>
+              <resolution>0.01</resolution>
+            </range>
+            <noise>
+                <type>gaussian</type>
+                <mean>0.0</mean>
+                <stddev>0.01</stddev>
+            </noise>
+          </lidar>
+        </sensor>
+      </link>
+
+    <joint name='lidar_joint' type='fixed'>
+      <parent>base_link</parent>
+      <child>lidar_link</child>
+      <pose relative_to="base_link">0.12 0 0.28 0 0 0</pose>
+    </joint>
+
+
+    <!-- ##################################### PLUGINS ##################################### -->
+
+    <!--    <plugin-->
+    <!--      filename="libgazebo_ros_init.so"-->
+    <!--      name="gazebo_ros_init">-->
+    <!--      <ros>-->
+    <!--        <namespace>/</namespace>-->
+    <!--      </ros>-->
+    <!--    </plugin>-->
+
+    <!--    <plugin-->
+    <!--      filename="libgazebo_ros_factory.so"-->
+    <!--      name="gazebo_ros_factory">-->
+    <!--    </plugin>-->
+
+<!--    <plugin name='ignition::gazebo::systems::DiffDrive' filename='ignition-gazebo-diff-drive-system'>-->
+<!--      <left_joint>drivewhl_l_joint</left_joint>-->
+<!--      <right_joint>drivewhl_r_joint</right_joint>-->
+<!--      <wheel_separation>0.247</wheel_separation>-->
+<!--      <wheel_radius>0.07</wheel_radius>-->
+<!--      <odom_publish_frequency>1</odom_publish_frequency>-->
+<!--      <max_linear_acceleration>1</max_linear_acceleration>-->
+<!--      <min_linear_acceleration>-1</min_linear_acceleration>-->
+<!--      <max_angular_acceleration>2</max_angular_acceleration>-->
+<!--      <min_angular_acceleration>-2</min_angular_acceleration>-->
+<!--      <max_linear_velocity>0.5</max_linear_velocity>-->
+<!--      <min_linear_velocity>-0.5</min_linear_velocity>-->
+<!--      <max_angular_velocity>1</max_angular_velocity>-->
+<!--      <min_angular_velocity>-1</min_angular_velocity>-->
+<!--    </plugin>-->
+
+    <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+      <!-- wheels -->
+      <left_joint>drivewhl_l_joint</left_joint>
+      <right_joint>drivewhl_r_joint</right_joint>
+      <!-- kinematics -->
+      <wheel_separation>0.247</wheel_separation>
+      <wheel_radius>0.07</wheel_radius>
+      <!-- limits -->
+      <max_linear_acceleration>1</max_linear_acceleration>
+      <!-- input -->
+<!--      <topic>/cmd_vel</topic>-->
+      <!-- output -->
+<!--      <odom_topic>/odom</odom_topic>-->
+<!--      <tf_topic>/tf</tf_topic>-->
+      <frame_id>odom</frame_id>
+      <child_frame_id>base_link</child_frame_id>
+    </plugin>
+
+    <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+      <topic>joint_states</topic>
+    </plugin>
+
+<!--    <plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher">-->
+<!--        <publish_link_pose>true</publish_link_pose>-->
+<!--        <use_pose_vector_msg>true</use_pose_vector_msg>-->
+<!--        <static_publisher>true</static_publisher>-->
+<!--        <static_update_frequency>1</static_update_frequency>-->
+<!--      </plugin>-->
+
+<!--    <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">-->
+<!--        <odom_frame>odom</odom_frame>-->
+<!--        <robot_base_frame>base_link</robot_base_frame>-->
+<!--      </plugin>-->
+
+
+  </model>
+</sdf>
